@@ -1,38 +1,39 @@
 RS Chatrabash Final PWA
-========================
-Primary member data: 37 members.
 
-Rent:
-- Postpaid system.
-- January rent is collected in February, February in March, etc.
-- December 2026 rent is collected in January 2027.
-- Opening due is 0.
-- Underpayment creates due that carries forward.
-- Overpayment creates advance that carries forward.
-- Rent history is available per member.
+Rent collection rule:
+1. December 2025 rent is collected in January 2026.
+2. January 2026 rent is collected in February 2026.
+3. February 2026 rent is collected in March 2026, and so on.
+4. In September 2026, only August 2026 rent is newly collectible.
+5. If July 2026 rent was unpaid or underpaid in August 2026, that unpaid amount carries as Due into September 2026, together with the August 2026 rent.
+6. A payment greater than the amount currently collectible creates Advance (+), which carries to the next collection month.
+7. A future rent month never appears as Due before its collection month.
+8. Opening Due starts at ৳0.
+
+Example:
+July rent = ৳1100. If only ৳800 is paid in August, ৳300 remains Due. In September, August rent is added to that ৳300, so the amount collectible is August rent + ৳300.
 
 Deposit:
-- Deposit is separate from monthly rent.
-- Every member can have a manually entered deposit amount.
-- When a member leaves, deposit can be used to settle the member's current rent due.
-- Deposit settlement is recorded separately as "জামানত থেকে Rent Due সমন্বয়".
-- Settlement cannot exceed the current rent due or remaining deposit.
-- Remaining deposit can be recorded as refunded money.
+- Deposit is separate from rent.
+- Enter each member's actual deposit manually.
+- When a member leaves, deposit can be used to settle current Rent Due.
+- Deposit settlement is recorded separately.
+- Settlement cannot exceed current Rent Due or remaining deposit.
+- Remaining deposit can be recorded as refunded.
 
 WiFi:
-- WiFi connection/monthly fee is separate from rent.
-- WiFi payment, due and advance never merge with rent.
+- WiFi Connection Fee is a separate module.
+- WiFi payment, Due and Advance never merge with room rent.
 
-Member:
-- Individual profile.
-- Room, rent, phone, address, district, upazila, joining date, deposit and WiFi fee.
-- Add new members.
-- Mark members as left.
+Members:
+- 37 primary members included.
+- Room and rent values are based on the supplied list.
+- New member, edit member, mark left, profile, phone and deposit.
 
 Data:
 - Local storage.
-- Backup and restore JSON.
-- PWA/offline service worker.
+- Backup/Restore JSON.
+- PWA service worker and offline support.
 
-Installation:
-Upload index.html, app.js, manifest.json, sw.js, icon.svg, icon-192.png and icon-512.png to the GitHub Pages repository root.
+GitHub Pages:
+Upload all files in the root of this package and replace the old files.
